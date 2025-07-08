@@ -37,4 +37,5 @@ exports.groups = [
 	'https://t.me/znhmao',
 	'https://t.me/soderzhanki11chat',
 	'https://t.me/Sodershanka36',
+	'https://t.me/prostitutki_ufa02',
 ];

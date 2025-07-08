@@ -20,5 +20,4 @@ exports.groups = [
   'https://t.me/broccoli_cz_insiders',
   'https://t.me/ChatWjdndb17',
   'https://t.me/sex116sex16',
-  '',
 ]
