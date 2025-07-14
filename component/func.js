@@ -2,7 +2,7 @@ async function sendMessageToGroups(client, groups, message) {
 	let i = 0;
 	console.log(groups.length);
 	const interval = setInterval(async () => {
-		if(i > groups.length) {
+		if(i >= groups.length) {
 			clearInterval(interval);
 			console.log(`Messages have been sent to all groups!!! - ${getTodayDate()}`);
 			return;

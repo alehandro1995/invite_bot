@@ -29,7 +29,7 @@ const msg = "**🔥РЕАЛЬНАЯ ИНДИ🔥**\n\nСовсем недавн�
 	console.log("You should now be connected.");
 	console.log(client.session.save());
 	//sendMessageToGroups(client, groups, msg);
-	cron.schedule('*/20 * * * *', () => {
+	cron.schedule('0 * * * *', () => {
 		sendMessageToGroups(client, groups, msg);
 	});
 })();
