@@ -30,9 +30,9 @@ const msg = `Всем привет 💋💋💋
 
 	console.log("You should now be connected.");
 	console.log(client.session.save());
-	//sendMessageToGroups(client, groups, msg);
+	sendMessageToGroups(client, groups, msg);
 	
-	cron.schedule('*/20 * * * *', () => {
-		sendMessageToGroups(client, groups, msg);
-	});
+	//cron.schedule('*/20 * * * *', () => {
+	//	sendMessageToGroups(client, groups, msg);
+	//});
 })();

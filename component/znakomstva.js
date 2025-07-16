@@ -28,7 +28,7 @@ exports.groups = [
   'https://t.me/znakomstva_spb17',
   'https://t.me/mbr_sex',
   //'https://t.me/Vkazani116',
-  'https://t.me/viirtsexchat',
+  'https://t.me/viirtsexchat', //16.07 19:10
   //'https://t.me/ZnakomstvaBelgorod18',
   //'https://t.me/ekb_eskort96',
   //'https://t.me/eskort_54',
@@ -36,6 +36,7 @@ exports.groups = [
   //'https://t.me/soderzhanki_54',
   //'https://t.me/prostitutki_ufa02',
   'https://t.me/naity3',
+  'https://t.me/gruppa_dlya_znakomstva12',
   'https://t.me/ishchu_paru11',
   'https://t.me/nayti20',
   'https://t.me/chatikaia',
@@ -56,6 +57,7 @@ exports.groups = [
   'https://t.me/saltovka_new_girl',
   'https://t.me/LCDSCHAT',
   'https://t.me/datingsexchat',
+  'https://t.me/friendschat8',
   'https://t.me/virtuhachat',
   'https://t.me/virt_s',
   //'https://t.me/balichatik',
@@ -64,8 +66,8 @@ exports.groups = [
   'https://t.me/Love_escort',
   //'https://t.me/vpishu_kazan',
   'https://t.me/VpISkA991',
-  'https://t.me/gogogouwugh',
-  'https://t.me/Waiting4Youchat',
+  //'https://t.me/gogogouwugh',
+  //'https://t.me/Waiting4Youchat',
   'https://t.me/chatikk7777',
   'https://t.me/chatikvzp',
   'https://t.me/moskva69sex',
@@ -74,7 +76,6 @@ exports.groups = [
   'https://t.me/gospoja4',
   'https://t.me/gospoja7',
   'https://t.me/ichyrabagospojy',
-  'https://t.me/znakomstvad5',
   'https://t.me/KRDvstechi',
   'https://t.me/crimea_hots',
   'https://t.me/RostovChatVstr',
@@ -84,6 +85,9 @@ exports.groups = [
   'https://t.me/KazanVstrechii',
   'https://t.me/nozhki_fetishist',
   'https://t.me/NovgorodZnakomstvaVstrechi',
+  'https://t.me/foot_fetish_beseda',
+  'https://t.me/ishchu_parnyak',
+  'https://t.me/FraerVzPodpiska',
 ]
 
 
