@@ -76,18 +76,11 @@ exports.groups = [
   'https://t.me/gospoja4',
   'https://t.me/gospoja7',
   'https://t.me/ichyrabagospojy',
-  'https://t.me/KRDvstechi',
   'https://t.me/crimea_hots',
-  'https://t.me/RostovChatVstr',
-  'https://t.me/SaratovWstr',
-  'https://t.me/VstrechiKazanskie',
-  'https://t.me/PermVpiskiii',
-  'https://t.me/KazanVstrechii',
-  'https://t.me/nozhki_fetishist',
-  'https://t.me/NovgorodZnakomstvaVstrechi',
-  'https://t.me/foot_fetish_beseda',
   'https://t.me/ishchu_parnyak',
   'https://t.me/FraerVzPodpiska',
+  'https://t.me/znakomstvaC1',
+  'https://t.me/qizlieblack',
 ]
 
 
