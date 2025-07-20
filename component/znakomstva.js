@@ -75,8 +75,11 @@ exports.groups = [
   'https://t.me/gospoja4',
   'https://t.me/gospoja7',
   'https://t.me/ichyrabagospojy',
+  'https://t.me/crimea_hots',
   'https://t.me/ishchu_parnyak',
   'https://t.me/FraerVzPodpiska',
+  'https://t.me/znakomstvaC1',
+  'https://t.me/qizlieblack',
 ]
 
 
