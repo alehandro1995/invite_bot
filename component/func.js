@@ -1,6 +1,6 @@
 async function sendMessageToGroups(client, groups, message) {
 	let i = 0;
-	console.log(groups.length);
+	console.log(groups.length, message);
 	const interval = setInterval(async () => {
 		if(i >= groups.length) {
 			clearInterval(interval);
