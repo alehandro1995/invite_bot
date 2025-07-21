@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^17.2.0",
     "input": "^1.0.1",
     "node-cron": "^3.0.3",
     "telegram": "^2.21.2"

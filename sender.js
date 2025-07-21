@@ -2,15 +2,17 @@ const { TelegramClient } = require("telegram");
 const { StringSession } = require("telegram/sessions");
 const cron = require('node-cron');
 //const { Api } = require("telegram/tl");
-const input = require("input"); // npm i input
+//const input = require("input"); // npm i input
 //const fs = require("fs");
 const {groups} = require("./component/znakomstva");
 const { sendMessageToGroups } = require("./component/func.js");
 
+require("dotenv").config();
+
 
 const apiId = 11207257;
 const apiHash = "bee101d6246ecf374bbae1b06fd6cc06";
-const stringSession = new StringSession(""); // fill this later with the value from session.save()
+const stringSession = new StringSession(process.env.TG_SESSION);
 const msg = [
 	`Составим компанию щедрому господину\nВстречи только на нейтральной территории`,
 	`Будем рады новым знакомствам\nМальчики пишите нестесняйтесь\n`,
@@ -20,20 +22,13 @@ const msg = [
 ];
 
 (async () => {
-	console.log("Loading interactive example...");
+	console.log("🚀 Запуск Telegram клиента...");
 	const client = new TelegramClient(stringSession, apiId, apiHash, {
-			connectionRetries: 5,
+		connectionRetries: 5,
 	});
 
-	await client.start({
-		phoneNumber: async () => '+7 987 577 8925',
-		password: async () => 'nintendo27',
-		phoneCode: async () => await input.text("Please enter the code you received: "),
-		onError: (err) => console.log(err),
-	});
-
-	console.log("You should now be connected.");
-	console.log(client.session.save());
+	await client.connect(); // не start, потому что уже авторизованы
+	console.log("✅ Клиент готов к работе");
 	/*
 	let i = 0;
 	const interval = setInterval(async () => {
@@ -51,13 +46,13 @@ const msg = [
 	}, 1000 * 10);
 	*/
 
-	//sendMessageToGroups(client, groups, msg);
+	sendMessageToGroups(client, groups, msg[0]);
 	
-	let i = 0;
-	cron.schedule('*/30 * * * *', () => {
-		const message = msg[i];
-		sendMessageToGroups(client, groups, message);
-		i++;
-		if(i >= msg.length) i = 0;
-	});
+	//let i = 0;
+	//cron.schedule('*/30 * * * *', () => {
+	//const message = msg[i];
+	//sendMessageToGroups(client, groups, message);
+	//i++;
+	//if(i >= msg.length) i = 0;
+	//});
 })();
