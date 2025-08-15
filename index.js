@@ -1,22 +1,14 @@
 const { TelegramClient } = require("telegram");
 const { StringSession } = require("telegram/sessions");
-const { Api } = require("telegram/tl");
-const input = require("input"); // npm i input
+const { Api } = require("telegram");
+const input = require("input");
 const fs = require("fs");
 
 const apiId = 28303926;
 const apiHash = "7883d5805795b785fdde6f6f29546809";
 const stringSession = new StringSession("");
 
-function getTodayDate() {
-	const today = new Date();
-	const day = String(today.getDate()).padStart(2, '0');
-	const month = String(today.getMonth() + 1).padStart(2, '0');
-	const year = today.getFullYear();
-
-	return `${day}.${month}.${year}`;
-}
-
+const delay = 3000; // 3 секунды между сообщениями
 
 (async () => {
   console.log("Loading interactive example...");
@@ -25,80 +17,46 @@ function getTodayDate() {
   });
 
   await client.start({
-    phoneNumber: async () => '+79319520993',
+    phoneNumber: async () => '+15618394463',
     password: async () => 'nintendo27',
     phoneCode: async () => await input.text("Please enter the code you received: "),
     onError: (err) => console.log(err),
   });
 
   console.log("You should now be connected.");
-  console.log(client.session.save()); // Save this string to avoid logging in again
 
-  const channel = "https://t.me/davalki_kzn";
-  const channelURL = "https://t.me/vstrechiKZNchat";
-	const OFFSET = 250;
-	const LIMIT = 50;
-	const USER = 'jim_bro'
+  const message = "Привет друг!!!\nПриглашаем в наш чат, где мы делимся актуальными связками по обработке трафика и предоставляем доступ к проверенным площадкам.\nhttps://t.me/+q27GKlPEo2tlNTFh";
+  const contacts = JSON.parse(fs.readFileSync("data/mailing_list.json", "utf-8"));
 
-  async function getEntity(client, userId) {
-    try {
-      const entity = await client.getEntity(userId);
-      return entity;
-    } catch (error) {
-      console.log(`Error getting entity for user ID ${userId}:`, error);
-      return null;
+  for (const contact of contacts) {
+
+    try {		
+      console.log(`Sending message to ${contact.firstName || 'Unknown'} (${contact.phone || contact.id || 'no id'})...`);
+      // Получаем entity (после добавления в контакты шанс выше)
+      let entity;
+      try {
+        entity = await client.getEntity(contact.id);
+      } catch (e) {
+        console.error(`❌ Cannot get entity for ${contact.firstName || 'Unknown'} (ID: ${contact.id})`);
+        fs.appendFileSync('./log/message_errors.log', `[${new Date().toISOString()}] Entity not found for ${contact.id}\n`);
+        continue;
+      }
+
+      // Отправляем сообщение
+      await client.sendMessage(entity, { message });
+      console.log(`✅ Message sent to ${contact.firstName || 'Unknown'}`);
+
+      if (contacts.indexOf(contact) < contacts.length - 1) {
+        console.log(`⏳ Waiting ${delay / 1000} seconds before next message...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+		
+    } catch (err) {
+      console.error(`❌ Failed to send message to ${contact.firstName || 'Unknown'}: ${err.message}`);
+      fs.appendFileSync('./log/message_errors.log', `[${new Date().toISOString()}] Error sending to ${contact.id}: ${err.message}\n`);
     }
   }
 
-  try {
-    const result = await client.invoke(
-      new Api.channels.GetParticipants({
-        channel: channelURL,
-        filter: new Api.ChannelParticipantsRecent(),
-        offset: OFFSET,
-        limit: LIMIT, // Максимальное количество участников за один запрос (до 100)
-        hash: 0
-      })
-    );
-		
-		let i = 0;
-		const users = result.users;
-		let intervale = setInterval(async () => {
-			let user = users[i];
-
-			try {
-				// Find the user by username
-				const userEntity = await client.getEntity(user);
-				if(userEntity && !userEntity.bot){
-					const result = await client.invoke(
-						new Api.channels.InviteToChannel({
-							channel: channel,
-							users: [userEntity],
-						})
-					);
-
-					console.log(`InviteToChannel - ${i}`);
-				}else{
-					const userInfo = `${i} - ${userEntity.id} - ${userEntity.username} - ${userEntity.bot}`;
-					console.log(userInfo);
-				}
-			} catch (error) {
-				console.log("Error invoking getEntity or writing to file:", error);
-			}
-			
-			i++;
-			if (i >= users.length) {
-				clearInterval(intervale);
-				console.log("All users invited");
-				const data = `User: ${USER} - From: ${channelURL} - To: ${channel} - Offset: ${OFFSET} - Limit: ${LIMIT} - Date: ${getTodayDate()}\n`;
-				fs.appendFileSync('log/start_log_data.txt', data, (err) => {
-          if (err) throw err;
-        });
-			}
-			
-		}, 1000 * 60 * 20); // 20 minutes
-  } catch (error) {
-    console.log("Error invoking GetParticipants:", error);
-  }
-
+  console.log("📨 Finished sending messages to all contacts");
+  await client.disconnect();
 })();

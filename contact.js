@@ -15,7 +15,7 @@ const stringSession = new StringSession(""); // Empty string for first-time logi
   });
 
   await client.start({
-    phoneNumber: async () => '+7 978 606 8747',
+    phoneNumber: async () => '+15618394463',
     password: async () => 'nintendo27',
     phoneCode: async () => await input.text("Please enter the code you received: "),
     onError: (err) => console.log(err),
@@ -26,9 +26,8 @@ const stringSession = new StringSession(""); // Empty string for first-time logi
   console.log("You are now connected.");
 
   // Читаем контакты из файла
-  let contactsData = JSON.parse(fs.readFileSync("component/contacts.json", "utf-8"));
+  const contactsData = JSON.parse(fs.readFileSync("data/mailing_list.json", "utf-8"));
   console.log("Contacts loaded:", contactsData.length);
-  contactsData = contactsData.slice(0, 852);
   // Формируем запрос для добавления контактов
   const contacts = contactsData.map(
     (contact) =>
@@ -68,10 +67,9 @@ const stringSession = new StringSession(""); // Empty string for first-time logi
   console.log("Fetched contacts:", contacts);
 
   // Save contacts to a file
-  const filePath = "component/contacts.json";
-  fs.writeFileSync(filePath, JSON.stringify(contacts, null, 2), "utf-8");
+  fs.writeFileSync("data/mailing_list.json", JSON.stringify(contacts, null, 2), "utf-8");
   console.log(`Contacts saved to ${filePath}.`);
 
   await client.disconnect();
-  */
+	*/
 })();

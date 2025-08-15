@@ -4,7 +4,7 @@ const cron = require('node-cron');
 //const { Api } = require("telegram/tl");
 //const input = require("input"); // npm i input
 //const fs = require("fs");
-const {groups} = require("./component/groups");
+const {groups} = require("./data/groups");
 const { sendMessageToGroups } = require("./component/func.js");
 
 require("dotenv").config();
