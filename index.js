@@ -17,7 +17,7 @@ const delay = 3000; // 3 секунды между сообщениями
   });
 
   await client.start({
-    phoneNumber: async () => '+15618394463',
+    phoneNumber: async () => '+16504773726',
     password: async () => 'nintendo27',
     phoneCode: async () => await input.text("Please enter the code you received: "),
     onError: (err) => console.log(err),
@@ -26,8 +26,9 @@ const delay = 3000; // 3 секунды между сообщениями
   console.log("You should now be connected.");
 
   const message = "Привет друг!!!\nПриглашаем в наш чат, где мы делимся актуальными связками по обработке трафика и предоставляем доступ к проверенным площадкам.\nhttps://t.me/+q27GKlPEo2tlNTFh";
-  const contacts = JSON.parse(fs.readFileSync("data/mailing_list.json", "utf-8"));
-
+  //const contacts = JSON.parse(fs.readFileSync("data/mailing_list.json", "utf-8"));
+	const result = await client.invoke(new Api.contacts.GetContacts({}));
+	const contacts = result.users;
   for (const contact of contacts) {
 
     try {		
@@ -44,6 +45,7 @@ const delay = 3000; // 3 секунды между сообщениями
 
       // Отправляем сообщение
       await client.sendMessage(entity, { message });
+			fs.appendFileSync("./log/message.log", `[${new Date().toISOString()}] Message sent to ${contact.firstName || 'Unknown'} | ${contact.id}\n`);
       console.log(`✅ Message sent to ${contact.firstName || 'Unknown'}`);
 
       if (contacts.indexOf(contact) < contacts.length - 1) {

@@ -15,7 +15,7 @@ const stringSession = new StringSession(""); // Empty string for first-time logi
   });
 
   await client.start({
-    phoneNumber: async () => '+15618394463',
+    phoneNumber: async () => '+16504773726',
     password: async () => 'nintendo27',
     phoneCode: async () => await input.text("Please enter the code you received: "),
     onError: (err) => console.log(err),
@@ -24,7 +24,7 @@ const stringSession = new StringSession(""); // Empty string for first-time logi
   console.log("You are now connected.");
   console.log("Your session string:", client.session.save());
   console.log("You are now connected.");
-
+	/*
   // Читаем контакты из файла
   const contactsData = JSON.parse(fs.readFileSync("data/mailing_list.json", "utf-8"));
   console.log("Contacts loaded:", contactsData.length);
@@ -51,10 +51,12 @@ const stringSession = new StringSession(""); // Empty string for first-time logi
   console.log("Total contacts in your Telegram:", result.users.length);
 
   await client.disconnect();
-  /*
+	*/
+  
   // Fetch contacts
   const result = await client.invoke(new Api.contacts.GetContacts({}));
-
+	
+	
   // Process contacts into a readable format
   const contacts = result.users.map((user) => ({
     id: user.id,
@@ -67,9 +69,8 @@ const stringSession = new StringSession(""); // Empty string for first-time logi
   console.log("Fetched contacts:", contacts);
 
   // Save contacts to a file
-  fs.writeFileSync("data/mailing_list.json", JSON.stringify(contacts, null, 2), "utf-8");
+	const filePath = "./data/mailing_list.json";
+  fs.writeFileSync(filePath, JSON.stringify(contacts, null, 2), "utf-8");
   console.log(`Contacts saved to ${filePath}.`);
-
   await client.disconnect();
-	*/
 })();
