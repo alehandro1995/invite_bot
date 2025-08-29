@@ -30,6 +30,8 @@ const delay = 3000; // 3 секунды между сообщениями
 	const result = await client.invoke(new Api.contacts.GetContacts({}));
 	const contacts = result.users;
   for (const contact of contacts) {
+		console.log(`⏳ Waiting ${delay / 1000} seconds before next message...`);
+    await new Promise(resolve => setTimeout(resolve, delay));
 
     try {		
       console.log(`Sending message to ${contact.firstName || 'Unknown'} (${contact.phone || contact.id || 'no id'})...`);
@@ -47,11 +49,6 @@ const delay = 3000; // 3 секунды между сообщениями
       await client.sendMessage(entity, { message });
 			fs.appendFileSync("./log/message.log", `[${new Date().toISOString()}] Message sent to ${contact.firstName || 'Unknown'} | ${contact.id}\n`);
       console.log(`✅ Message sent to ${contact.firstName || 'Unknown'}`);
-
-      if (contacts.indexOf(contact) < contacts.length - 1) {
-        console.log(`⏳ Waiting ${delay / 1000} seconds before next message...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
-      }
 		
     } catch (err) {
       console.error(`❌ Failed to send message to ${contact.firstName || 'Unknown'}: ${err.message}`);
