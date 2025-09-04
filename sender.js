@@ -51,11 +51,6 @@ process.on('SIGINT', async () => {
 });
 
 async function sendBroadcast(client) {
-    if (!client) {
-        console.log("❌ Клиент не инициализирован");
-        return;
-    }
-
     console.log("\n⏰ Запуск ежечасной рассылки...");
     console.log("⏰ Время:", new Date().toLocaleString());
 
@@ -82,9 +77,8 @@ async function sendBroadcast(client) {
                     
                     // Отправляем сообщение с HTML-разметкой
                     await client.sendMessage(dialog.entity, {
-                        message: MESSAGE_TEXT,
-                        parseMode: "markdown",
-												linkPreview: false
+                      message: MESSAGE_TEXT,
+                      parseMode: "markdownv2",
                     });
                     
                     console.log(`✅ Успешно отправлено в: ${dialog.name}`);
